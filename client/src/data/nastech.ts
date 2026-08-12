@@ -251,7 +251,36 @@ const workspacePages: ExperiencePage[] = workspaceFamilies.flatMap(([section, ti
   source: sourceReferences.tools,
 })));
 
-export const experiencePages: ExperiencePage[] = [...baseExperiencePages, ...capabilityPages, ...nestedPages, ...workspacePages].slice(0, 229);
+const operationsFamilies = [
+  ["Command practice", ["CLI onboarding", "Terminal shortcuts", "Session handoff", "Output review", "Command history", "Command safety", "Interactive help"]],
+  ["Memory practice", ["Memory foundations", "Profile context", "Session recall", "Memory proposal", "Approval queue", "Search filters", "Retention review"]],
+  ["Skills practice", ["Skill discovery", "Skill installation", "Skill authoring", "Skill review", "Skill bundle", "Skill routing", "Skill diagnostics"]],
+  ["Tool practice", ["Browser sequence", "Research sequence", "File workspace", "Terminal workspace", "Media workspace", "Tool approval", "Tool observability"]],
+  ["Provider practice", ["Provider setup", "Model selection", "Endpoint health", "Context strategy", "Prompt caching", "Model fallback policy", "Usage boundaries"]],
+  ["Automation practice", ["Job intent", "Schedule builder", "Script task", "Delivery target", "Run timeline", "Retry policy", "Job archival"]],
+  ["Gateway practice", ["Channel connection", "Pairing review", "Delivery status", "Reply recovery", "Message permissions", "Identity mapping", "Gateway diagnostics"]],
+  ["Deployment practice", ["Runtime selection", "Container policy", "Remote workspace", "Installer verification", "Configuration export", "Environment checks", "Incident notes"]],
+  ["Community practice", ["Contributor orientation", "Issue preparation", "Release notes", "Documentation request", "Support pathways", "Community roadmap", "Feedback routing"]],
+  ["Africa forward", ["Local-first design", "Offline-aware planning", "Learning ecosystem", "Research collaboration", "Regional partners", "Community language", "Launch operations"]],
+] as const;
+
+const operationsPages: ExperiencePage[] = operationsFamilies.flatMap(([section, titles]) => titles.map((title) => ({
+  slug: `operations-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
+  title,
+  summary: "A focused in-app operational page that links product intent with relevant NasTech documentation and source context.",
+  section,
+  source: sourceReferences.architecture,
+})));
+
+const operationsOverview: ExperiencePage = {
+  slug: "operations-overview",
+  title: "Operations overview",
+  summary: "An indexed view of the NasTech operational practice surfaces, documentation context, and source-backed pathways.",
+  section: "Operations",
+  source: sourceReferences.architecture,
+};
+
+export const experiencePages: ExperiencePage[] = [...baseExperiencePages, ...capabilityPages, ...nestedPages, ...workspacePages, operationsOverview, ...operationsPages].slice(0, 300);
 
 export const routeSourceMap: Record<string, SourceReference> = Object.fromEntries(
   experiencePages.map((page) => [page.slug, page.source]),

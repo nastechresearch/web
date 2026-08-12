@@ -4,8 +4,8 @@ import { capabilities, experiencePages, routeSourceMap, subpageNames } from "./n
 describe("NasTech public source map", () => {
   it("keeps the verified capabilities and expandable product architecture intact", () => {
     expect(capabilities).toHaveLength(72);
-    expect(experiencePages).toHaveLength(229);
+    expect(experiencePages).toHaveLength(300);
     expect(subpageNames.length).toBeGreaterThanOrEqual(38);
-    expect(Object.keys(routeSourceMap)).toHaveLength(229);
+    expect(Object.keys(routeSourceMap)).toHaveLength(300);
   });
 });
