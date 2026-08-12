@@ -1,0 +1,62 @@
+name: Scan NasTech Agent updates
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.compare.outputs.changed }}
+      revision: ${{ steps.compare.outputs.revision }}
+      release: ${{ steps.compare.outputs.release }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: compare
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          revision="$(gh api repos/nastechresearch/nastech-agent/commits/main --jq .sha)"
+          release="$(gh api repos/nastechresearch/nastech-agent/releases/latest --jq .tag_name 2>/dev/null || echo 'No published release')"
+          previous="$(cat .github/upstream-revision.txt 2>/dev/null || true)"
+          echo "revision=$revision" >> "$GITHUB_OUTPUT"
+          echo "release=$release" >> "$GITHUB_OUTPUT"
+          if [ "$revision" = "$previous" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          printf '%s\n' "$revision" > .github/upstream-revision.txt
+          mkdir -p docs
+          cat > docs/upstream-status.md <<EOF
+          # Upstream status
+
+          - Repository: https://github.com/nastechresearch/nastech-agent
+          - Revision: \\`$revision\\`
+          - Latest release: $release
+          - Checked: $(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+          This file is refreshed only when the upstream revision changes.
+          EOF
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - if: steps.compare.outputs.changed == 'true'
+        run: |
+          git config user.name "NasTech Automation"
+          git config user.email "automation@nastechresearch.com"
+          git add .github/upstream-revision.txt docs/upstream-status.md
+          git commit -m "chore: sync upstream revision"
+          git push
+  quality:
+    needs: detect
+    if: needs.detect.outputs.changed == 'true'
+    uses: ./.github/workflows/quality.yml
+  publish:
+    needs: [detect, quality]
+    if: needs.detect.outputs.changed == 'true'
+    uses: ./.github/workflows/pages.yml

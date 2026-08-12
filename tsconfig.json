@@ -1,0 +1,22 @@
+{
+  "include": ["client/src/App.tsx", "client/src/main.tsx", "client/src/pages/Home.tsx", "client/src/pages/NotFound.tsx", "client/src/components/AIChatBox.tsx", "client/src/components/SubscriptionForm.tsx", "client/src/components/ErrorBoundary.tsx", "client/src/components/ui/sonner.tsx", "client/src/components/ui/tooltip.tsx", "client/src/contexts/ThemeContext.tsx", "client/src/data/nastech.ts", "client/src/lib/github.ts", "client/src/lib/interactions.ts", "client/src/lib/trpc.ts"],
+  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
+  "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
+    "noEmit": true,
+    "module": "ESNext",
+    "strict": true,
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@/*": ["./client/src/*"]
+    }
+  }
+}

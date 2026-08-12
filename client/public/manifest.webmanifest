@@ -1,0 +1,9 @@
+{
+  "name": "NasTech Agent",
+  "short_name": "NasTech",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "description": "NasTech Agent public software workspace."
+}
