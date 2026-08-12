@@ -1,6 +1,6 @@
 # NasTech App
 
-NasTech App is a clean Flutter mobile implementation for the NasTech Agent platform. It takes visual inspiration from the supplied MIT-licensed reference only at the interaction-system level: rounded cards, layered motion, touch-first navigation, and restrained animated state changes. It does **not** retain the source application’s branding, daily-trivia flows, advertising, authentication, analytics, subscriptions, Firebase configuration, or product content.
+NasTech App is a clean Flutter mobile implementation for the NasTech Agent platform. It uses rounded cards, layered motion, touch-first navigation, and restrained animated state changes within a fully NasTech-specific product experience and configuration.
 
 ## Product boundary
 

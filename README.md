@@ -26,7 +26,7 @@ The public build fetches repository activity directly from GitHub. The hosted Na
 
 ## NasTech App
 
-The [`mobile/`](mobile/) directory contains **NasTech App**, a clean Flutter companion for the NasTech Agent platform. It is inspired by a supplied MIT-licensed rounded and animated interaction reference, but does not retain the source product’s branding, daily-trivia flows, advertising, Firebase configuration, subscriptions, analytics, or product content. The native client provides a mobile product dashboard, capability atlas, installation center, a mobile gateway for **Ollama Cloud Gemma 4 31B**, and optional local Kokoro playback.
+The [`mobile/`](mobile/) directory contains **NasTech App**, a clean Flutter companion for the NasTech Agent platform. The native client provides rounded animated navigation, a mobile product dashboard, capability atlas, installation center, a mobile gateway for **Ollama Cloud Gemma 4 31B**, and optional local Kokoro playback.
 
 The `Build NasTech Android app` workflow creates an unsigned review APK and rejects artifacts above **309 MiB**. It builds with the compact Kokoro int8 model and one selected voice instead of the full-precision model. Review [`mobile/README.md`](mobile/README.md) and [`mobile/docs/ARCHITECTURE.md`](mobile/docs/ARCHITECTURE.md) before requesting a signed public release.
 
