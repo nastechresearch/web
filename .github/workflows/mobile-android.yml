@@ -27,7 +27,9 @@ jobs:
         with:
           channel: stable
       - name: Generate a clean Android platform shell
-        run: flutter create --platforms=android --org com.nastech .
+        run: |
+          flutter create --platforms=android --org com.nastech .
+          rm -f test/widget_test.dart
       - name: Restore Flutter dependencies
         run: flutter pub get
       - name: Prepare compact Kokoro assets

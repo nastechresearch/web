@@ -165,25 +165,98 @@ class _ConsolePageState extends State<_ConsolePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(padding: const EdgeInsets.fromLTRB(20, 18, 20, 14), child: Column(children: [
-    const _SectionLabel(kicker: 'LIVE IN-BROWSER AI', title: 'Gemma 4, with a voice.'), const SizedBox(height: 6),
-    Row(children: [const Icon(Icons.volume_up_rounded, color: NasTechColors.green, size: 17), const SizedBox(width: 8), Expanded(child: Text(_voiceStatus, style: const TextStyle(color: NasTechColors.muted, fontSize: 11)))]), const SizedBox(height: 14),
-    Wrap(spacing: 8, runSpacing: 8, children: quickPrompts.map((prompt) => ActionChip(label: Text(prompt, style: const TextStyle(fontSize: 11)), onPressed: _pending ? null : () => _send(prompt))).toList()), const SizedBox(height: 14),
-    Expanded(child: ListView.separated(itemCount: _messages.length, separatorBuilder: (_, __) => const SizedBox(height: 10), itemBuilder: (_, index) { final message = _messages[index]; final assistant = message.role == 'assistant'; return Align(alignment: assistant ? Alignment.centerLeft : Alignment.centerRight, child: GestureDetector(onLongPress: assistant ? () => _speak(message.content) : null, child: Container(constraints: const BoxConstraints(maxWidth: 340), padding: const EdgeInsets.all(15), decoration: BoxDecoration(color: assistant ? NasTechColors.panel : NasTechColors.cyan, borderRadius: BorderRadius.circular(22), border: Border.all(color: assistant ? Colors.white.withOpacity(.08) : Colors.transparent)), child: Text(message.content, style: TextStyle(color: assistant ? NasTechColors.white : NasTechColors.black, height: 1.35)))); })),
-    Row(children: [Expanded(child: TextField(controller: _input, enabled: !_pending, minLines: 1, maxLines: 4, textInputAction: TextInputAction.send, onSubmitted: (_) => _send(), decoration: const InputDecoration(hintText: 'Ask NasTech…'))), const SizedBox(width: 9), IconButton.filled(onPressed: _pending ? null : _send, icon: _pending ? const SizedBox(width: 17, height: 17, child: CircularProgressIndicator(strokeWidth: 2)) : const Icon(Icons.arrow_upward_rounded))]),
-  ]));
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.fromLTRB(20, 18, 20, 14),
+    child: Column(children: [
+      const _SectionLabel(kicker: 'LIVE IN-BROWSER AI', title: 'Gemma 4, with a voice.'),
+      const SizedBox(height: 6),
+      Row(children: [
+        const Icon(Icons.volume_up_rounded, color: NasTechColors.green, size: 17),
+        const SizedBox(width: 8),
+        Expanded(child: Text(_voiceStatus, style: const TextStyle(color: NasTechColors.muted, fontSize: 11))),
+      ]),
+      const SizedBox(height: 14),
+      Wrap(spacing: 8, runSpacing: 8, children: quickPrompts.map((prompt) => ActionChip(label: Text(prompt, style: const TextStyle(fontSize: 11)), onPressed: _pending ? null : () => _send(prompt))).toList()),
+      const SizedBox(height: 14),
+      Expanded(
+        child: ListView.separated(
+          itemCount: _messages.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 10),
+          itemBuilder: (_, index) {
+            final message = _messages[index];
+            final assistant = message.role == 'assistant';
+            return Align(
+              alignment: assistant ? Alignment.centerLeft : Alignment.centerRight,
+              child: GestureDetector(
+                onLongPress: assistant ? () => _speak(message.content) : null,
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 340),
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(color: assistant ? NasTechColors.panel : NasTechColors.cyan, borderRadius: BorderRadius.circular(22), border: Border.all(color: assistant ? Colors.white.withOpacity(.08) : Colors.transparent)),
+                  child: Text(message.content, style: TextStyle(color: assistant ? NasTechColors.white : NasTechColors.black, height: 1.35)),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+      Row(children: [
+        Expanded(child: TextField(controller: _input, enabled: !_pending, minLines: 1, maxLines: 4, textInputAction: TextInputAction.send, onSubmitted: (_) => _send(), decoration: const InputDecoration(hintText: 'Ask NasTech…'))),
+        const SizedBox(width: 9),
+        IconButton.filled(onPressed: _pending ? null : _send, icon: _pending ? const SizedBox(width: 17, height: 17, child: CircularProgressIndicator(strokeWidth: 2)) : const Icon(Icons.arrow_upward_rounded)),
+      ]),
+    ]),
+  );
 }
 
 class _AtlasPage extends StatelessWidget {
   const _AtlasPage();
   @override
-  Widget build(BuildContext context) => ListView(padding: const EdgeInsets.fromLTRB(20, 18, 20, 24), children: [const _SectionLabel(kicker: 'CAPABILITY ATLAS', title: 'Visible claims, traceable sources.'), const SizedBox(height: 20), ...nasTechCapabilities.map((capability) => Container(margin: const EdgeInsets.only(bottom: 12), padding: const EdgeInsets.all(18), decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: Colors.white.withOpacity(.08))), child: Row(children: [Icon(capability.icon, color: NasTechColors.cyan), const SizedBox(width: 14), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(capability.title, style: const TextStyle(fontWeight: FontWeight.w800)), const SizedBox(height: 4), Text(capability.detail, style: const TextStyle(color: NasTechColors.muted, fontSize: 12)), const SizedBox(height: 8), Text(capability.source.toUpperCase(), style: const TextStyle(color: NasTechColors.green, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1))]))]))]);
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
+    children: [
+      const _SectionLabel(kicker: 'CAPABILITY ATLAS', title: 'Visible claims, traceable sources.'),
+      const SizedBox(height: 20),
+      ...nasTechCapabilities.map((capability) => Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: Colors.white.withOpacity(.08))),
+        child: Row(children: [
+          Icon(capability.icon, color: NasTechColors.cyan),
+          const SizedBox(width: 14),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(capability.title, style: const TextStyle(fontWeight: FontWeight.w800)),
+            const SizedBox(height: 4),
+            Text(capability.detail, style: const TextStyle(color: NasTechColors.muted, fontSize: 12)),
+            const SizedBox(height: 8),
+            Text(capability.source.toUpperCase(), style: const TextStyle(color: NasTechColors.green, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
+          ])),
+        ]),
+      )),
+    ],
+  );
 }
 
 class _InstallPage extends StatelessWidget {
   const _InstallPage();
   @override
-  Widget build(BuildContext context) => ListView(padding: const EdgeInsets.fromLTRB(20, 18, 20, 24), children: [const _SectionLabel(kicker: 'INSTALL CENTER', title: 'Begin from the source.'), const SizedBox(height: 18), ...const [('Linux', 'curl -fsSL … | bash'), ('macOS', 'brew install nastech-agent'), ('Windows', 'Download the verified installer'), ('Mobile', 'NasTech Android release — package under 309 MB')].map((item) => Container(margin: const EdgeInsets.only(bottom: 12), padding: const EdgeInsets.all(19), decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: NasTechColors.cyan.withOpacity(.12))), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(item.$1, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17)), const SizedBox(height: 8), Text(item.$2, style: const TextStyle(color: NasTechColors.muted, fontFamily: 'monospace', fontSize: 12))]))]);
+  Widget build(BuildContext context) => ListView(
+    padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
+    children: [
+      const _SectionLabel(kicker: 'INSTALL CENTER', title: 'Begin from the source.'),
+      const SizedBox(height: 18),
+      ...const [('Linux', 'curl -fsSL … | bash'), ('macOS', 'brew install nastech-agent'), ('Windows', 'Download the verified installer'), ('Mobile', 'NasTech Android release — package under 309 MB')].map((item) => Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(19),
+        decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: NasTechColors.cyan.withOpacity(.12))),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(item.$1, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17)),
+          const SizedBox(height: 8),
+          Text(item.$2, style: const TextStyle(color: NasTechColors.muted, fontFamily: 'monospace', fontSize: 12)),
+        ]),
+      )),
+    ],
+  );
 }
 
 class _SectionLabel extends StatelessWidget {
