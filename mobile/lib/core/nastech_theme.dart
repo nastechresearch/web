@@ -25,7 +25,7 @@ ThemeData nasTechTheme() {
     scaffoldBackgroundColor: NasTechColors.black,
     fontFamily: 'Roboto',
     appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent, elevation: 0),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: NasTechColors.panel,
       elevation: 0,
       margin: EdgeInsets.zero,

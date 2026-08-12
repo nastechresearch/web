@@ -40,12 +40,12 @@ class _NasTechShellState extends State<NasTechShell> {
         top: false,
         child: Container(
           margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          decoration: BoxDecoration(color: NasTechColors.panel.withOpacity(.95), borderRadius: BorderRadius.circular(26), border: Border.all(color: NasTechColors.cyan.withOpacity(.16))),
+          decoration: BoxDecoration(color: NasTechColors.panel.withValues(alpha: .95), borderRadius: BorderRadius.circular(26), border: Border.all(color: NasTechColors.cyan.withValues(alpha: .16))),
           child: NavigationBar(
             height: 68,
             selectedIndex: _index,
             backgroundColor: Colors.transparent,
-            indicatorColor: NasTechColors.cyan.withOpacity(.16),
+            indicatorColor: NasTechColors.cyan.withValues(alpha: .16),
             onDestinationSelected: (value) => setState(() => _index = value),
             destinations: const [
               NavigationDestination(icon: Icon(Icons.grid_view_rounded), label: 'Home'),
@@ -64,8 +64,8 @@ class _AmbientBackdrop extends StatelessWidget {
   const _AmbientBackdrop();
   @override
   Widget build(BuildContext context) => IgnorePointer(child: Stack(children: [
-    Positioned(top: -120, right: -70, child: Container(width: 290, height: 290, decoration: BoxDecoration(shape: BoxShape.circle, gradient: RadialGradient(colors: [NasTechColors.cyan.withOpacity(.13), Colors.transparent])))),
-    Positioned(bottom: 100, left: -120, child: Container(width: 270, height: 270, decoration: BoxDecoration(shape: BoxShape.circle, gradient: RadialGradient(colors: [NasTechColors.green.withOpacity(.08), Colors.transparent])))),
+    Positioned(top: -120, right: -70, child: Container(width: 290, height: 290, decoration: BoxDecoration(shape: BoxShape.circle, gradient: RadialGradient(colors: [NasTechColors.cyan.withValues(alpha: .13), Colors.transparent])))),
+    Positioned(bottom: 100, left: -120, child: Container(width: 270, height: 270, decoration: BoxDecoration(shape: BoxShape.circle, gradient: RadialGradient(colors: [NasTechColors.green.withValues(alpha: .08), Colors.transparent])))),
   ]));
 }
 
@@ -109,7 +109,7 @@ class _LiveStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(20),
-    decoration: BoxDecoration(gradient: LinearGradient(colors: [NasTechColors.cyan.withOpacity(.20), NasTechColors.panel]), borderRadius: BorderRadius.circular(30), border: Border.all(color: NasTechColors.cyan.withOpacity(.34))),
+    decoration: BoxDecoration(gradient: LinearGradient(colors: [NasTechColors.cyan.withValues(alpha: .20), NasTechColors.panel]), borderRadius: BorderRadius.circular(30), border: Border.all(color: NasTechColors.cyan.withValues(alpha: .34))),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(children: [Container(width: 8, height: 8, decoration: const BoxDecoration(color: NasTechColors.green, shape: BoxShape.circle)), const SizedBox(width: 8), const Text('AGENT SESSION', style: TextStyle(fontSize: 11, letterSpacing: 1.3, fontWeight: FontWeight.w800)), const Spacer(), const Text('LIVE', style: TextStyle(color: NasTechColors.cyan, fontWeight: FontWeight.w800, fontSize: 11))]),
       const SizedBox(height: 22), const Text('Ollama Cloud\nGemma 4 31B', style: TextStyle(fontSize: 27, height: 1.02, fontWeight: FontWeight.w800)), const SizedBox(height: 8), const Text('The mobile guide remains explicit about its model and connection state.', style: TextStyle(color: NasTechColors.muted)),
@@ -121,13 +121,13 @@ class _CapabilityCard extends StatelessWidget {
   const _CapabilityCard({required this.capability});
   final NasTechCapability capability;
   @override
-  Widget build(BuildContext context) => Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: NasTechColors.panel.withOpacity(.96), borderRadius: BorderRadius.circular(26), border: Border.all(color: Colors.white.withOpacity(.08))), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Icon(capability.icon, color: NasTechColors.green), const Spacer(), Text(capability.title, style: const TextStyle(fontWeight: FontWeight.w800)), const SizedBox(height: 7), Text(capability.detail, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: NasTechColors.muted, height: 1.25))]));
+  Widget build(BuildContext context) => Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: NasTechColors.panel.withValues(alpha: .96), borderRadius: BorderRadius.circular(26), border: Border.all(color: Colors.white.withValues(alpha: .08))), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Icon(capability.icon, color: NasTechColors.green), const Spacer(), Text(capability.title, style: const TextStyle(fontWeight: FontWeight.w800)), const SizedBox(height: 7), Text(capability.detail, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: NasTechColors.muted, height: 1.25))]));
 }
 
 class _AfricaCard extends StatelessWidget {
   const _AfricaCard();
   @override
-  Widget build(BuildContext context) => Container(height: 188, clipBehavior: Clip.antiAlias, decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(color: NasTechColors.green.withOpacity(.25))), child: Stack(fit: StackFit.expand, children: [Image.asset('assets/images/nastech-africa.jpg', fit: BoxFit.cover, color: Colors.black.withOpacity(.32), colorBlendMode: BlendMode.darken), const Positioned(left: 18, right: 18, bottom: 18, child: Text('Local learning, responsible access, and regional capability.', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17, shadows: [Shadow(color: Colors.black, blurRadius: 12)])))]));
+  Widget build(BuildContext context) => Container(height: 188, clipBehavior: Clip.antiAlias, decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), border: Border.all(color: NasTechColors.green.withValues(alpha: .25))), child: Stack(fit: StackFit.expand, children: [Image.asset('assets/images/nastech-africa.jpg', fit: BoxFit.cover, color: Colors.black.withValues(alpha: .32), colorBlendMode: BlendMode.darken), const Positioned(left: 18, right: 18, bottom: 18, child: Text('Local learning, responsible access, and regional capability.', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 17, shadows: [Shadow(color: Colors.black, blurRadius: 12)])))]));
 }
 
 class _ConsolePage extends StatefulWidget {
@@ -192,7 +192,7 @@ class _ConsolePageState extends State<_ConsolePage> {
                 child: Container(
                   constraints: const BoxConstraints(maxWidth: 340),
                   padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(color: assistant ? NasTechColors.panel : NasTechColors.cyan, borderRadius: BorderRadius.circular(22), border: Border.all(color: assistant ? Colors.white.withOpacity(.08) : Colors.transparent)),
+                  decoration: BoxDecoration(color: assistant ? NasTechColors.panel : NasTechColors.cyan, borderRadius: BorderRadius.circular(22), border: Border.all(color: assistant ? Colors.white.withValues(alpha: .08) : Colors.transparent)),
                   child: Text(message.content, style: TextStyle(color: assistant ? NasTechColors.white : NasTechColors.black, height: 1.35)),
                 ),
               ),
@@ -220,7 +220,7 @@ class _AtlasPage extends StatelessWidget {
       ...nasTechCapabilities.map((capability) => Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: Colors.white.withOpacity(.08))),
+        decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: Colors.white.withValues(alpha: .08))),
         child: Row(children: [
           Icon(capability.icon, color: NasTechColors.cyan),
           const SizedBox(width: 14),
@@ -248,7 +248,7 @@ class _InstallPage extends StatelessWidget {
       ...const [('Linux', 'curl -fsSL … | bash'), ('macOS', 'brew install nastech-agent'), ('Windows', 'Download the verified installer'), ('Mobile', 'NasTech Android release — package under 309 MB')].map((item) => Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(19),
-        decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: NasTechColors.cyan.withOpacity(.12))),
+        decoration: BoxDecoration(color: NasTechColors.panel, borderRadius: BorderRadius.circular(24), border: Border.all(color: NasTechColors.cyan.withValues(alpha: .12))),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(item.$1, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 17)),
           const SizedBox(height: 8),
