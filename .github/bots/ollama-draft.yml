@@ -1,0 +1,6 @@
+id: ollama-draft
+domain: AI assistance
+mode: governed
+output: Gemma 4 draft artifact or draft pull request
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,21 @@
+name: Feature request
+description: Propose a source-backed improvement for review.
+title: "feature: "
+labels: ["kind: feature", "needs triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach and source references
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and trade-offs

@@ -1,0 +1,6 @@
+id: tradeoff-mapper
+domain: decisions
+mode: governed
+output: option and trade-off matrix
+requires_human_review: true
+may_publish: false

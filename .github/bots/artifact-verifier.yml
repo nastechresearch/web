@@ -1,0 +1,6 @@
+id: artifact-verifier
+domain: release
+mode: governed
+output: build artifact verification report
+requires_human_review: true
+may_publish: false

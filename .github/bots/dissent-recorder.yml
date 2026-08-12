@@ -1,0 +1,6 @@
+id: dissent-recorder
+domain: discussions
+mode: governed
+output: dissent and risk record
+requires_human_review: true
+may_publish: false

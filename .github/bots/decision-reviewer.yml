@@ -1,0 +1,6 @@
+id: decision-reviewer
+domain: decisions
+mode: governed
+output: decision readiness review
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,32 @@
+name: Validate governed bot catalog
+
+on:
+  pull_request:
+    paths:
+      - ".github/bots/**"
+      - ".github/workflows/**"
+      - "docs/BOT-GOVERNANCE.md"
+  push:
+    branches: [main]
+    paths:
+      - ".github/bots/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enforce governed profile contracts
+        run: |
+          test "$(find .github/bots -name '*.yml' -type f | wc -l | tr -d ' ')" -eq 46
+          for profile in .github/bots/*.yml; do
+            grep -qx 'mode: governed' "$profile"
+            grep -qx 'requires_human_review: true' "$profile"
+            grep -qx 'may_publish: false' "$profile"
+            for field in id domain output; do grep -q "^$field: " "$profile"; done
+          done
+          test "$(grep -h '^id: ' .github/bots/*.yml | sort -u | wc -l | tr -d ' ')" -eq 46
+          echo "All governed bot profiles are valid."

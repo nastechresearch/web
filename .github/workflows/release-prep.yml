@@ -1,0 +1,32 @@
+name: Prepare governed release draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, for example v1.2.0"
+        required: true
+        type: string
+      target:
+        description: "Commit SHA or branch to release"
+        required: true
+        default: main
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create non-published release draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          TARGET: ${{ inputs.target }}
+        run: |
+          gh release view "$TAG" >/dev/null 2>&1 && { echo "A release with this tag already exists."; exit 1; } || true
+          gh release create "$TAG" --target "$TARGET" --draft --generate-notes --title "$TAG"
+          echo "Draft release created. It remains unpublished until a maintainer reviews and publishes it in GitHub."

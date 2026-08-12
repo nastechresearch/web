@@ -1,0 +1,6 @@
+id: bug-triager
+domain: issues
+mode: governed
+output: reproduction checklist
+requires_human_review: true
+may_publish: false

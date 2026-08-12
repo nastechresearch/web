@@ -1,0 +1,67 @@
+name: Draft architecture decision record
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: "Decision title"
+        required: true
+        type: string
+      context:
+        description: "Why a decision is needed"
+        required: true
+        type: string
+      options:
+        description: "Options to evaluate, separated by semicolons"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create reviewable ADR pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: ${{ inputs.title }}
+          CONTEXT: ${{ inputs.context }}
+          OPTIONS: ${{ inputs.options }}
+        run: |
+          slug="$(printf '%s' "$TITLE" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-\|-$//g')"
+          branch="bot/adr-${{ github.run_id }}"
+          mkdir -p docs/decisions
+          git switch -c "$branch"
+          cat > "docs/decisions/${{ github.run_id }}-${slug}.md" <<EOF
+          # $TITLE
+
+          ## Status
+
+          Proposed — requires maintainer approval.
+
+          ## Context
+
+          $CONTEXT
+
+          ## Options to evaluate
+
+          $(printf '%s' "$OPTIONS" | tr ';' '\n' | sed 's/^/- /')
+
+          ## Decision
+
+          Pending structured team discussion and maintainer approval.
+
+          ## Consequences
+
+          Record the expected benefits, costs, risks, and follow-up work after a decision is approved.
+          EOF
+          git config user.name "NasTech Automation"
+          git config user.email "automation@nastechresearch.com"
+          git add docs/decisions
+          git commit -m "docs: draft decision record"
+          git push -u origin "$branch"
+          gh pr create --draft --base main --head "$branch" --title "docs: draft decision record — $TITLE" --body "This is a governed draft. It records options and context only; it does not make a decision. Maintainer review and merge are required."

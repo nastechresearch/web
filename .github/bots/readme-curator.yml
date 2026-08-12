@@ -1,0 +1,6 @@
+id: readme-curator
+domain: documentation
+mode: governed
+output: README update draft
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: markdown-linter
+domain: documentation
+mode: governed
+output: Markdown quality report
+requires_human_review: true
+may_publish: false

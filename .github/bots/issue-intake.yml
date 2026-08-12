@@ -1,0 +1,6 @@
+id: issue-intake
+domain: issues
+mode: governed
+output: normalized issue metadata
+requires_human_review: true
+may_publish: false

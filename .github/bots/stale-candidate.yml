@@ -1,0 +1,6 @@
+id: stale-candidate
+domain: issues
+mode: governed
+output: stale issue candidate list
+requires_human_review: true
+may_publish: false

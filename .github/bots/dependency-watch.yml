@@ -1,0 +1,6 @@
+id: dependency-watch
+domain: intelligence
+mode: governed
+output: dependency update report
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: upstream-delta
+domain: intelligence
+mode: governed
+output: upstream change summary
+requires_human_review: true
+may_publish: false

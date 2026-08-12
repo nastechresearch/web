@@ -1,0 +1,6 @@
+id: roadmap-synthesizer
+domain: issues
+mode: governed
+output: roadmap signal summary
+requires_human_review: true
+may_publish: false

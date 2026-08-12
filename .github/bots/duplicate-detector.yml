@@ -1,0 +1,6 @@
+id: duplicate-detector
+domain: issues
+mode: governed
+output: duplicate candidate report
+requires_human_review: true
+may_publish: false

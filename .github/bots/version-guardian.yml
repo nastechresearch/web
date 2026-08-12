@@ -1,0 +1,6 @@
+id: version-guardian
+domain: release
+mode: governed
+output: version consistency report
+requires_human_review: true
+may_publish: false

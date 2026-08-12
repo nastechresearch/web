@@ -1,0 +1,6 @@
+id: issue-summarizer
+domain: issues
+mode: governed
+output: issue summary
+requires_human_review: true
+may_publish: false

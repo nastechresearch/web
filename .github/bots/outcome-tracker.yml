@@ -1,0 +1,6 @@
+id: outcome-tracker
+domain: decisions
+mode: governed
+output: decision outcome follow-up
+requires_human_review: true
+may_publish: false

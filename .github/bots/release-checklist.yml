@@ -1,0 +1,6 @@
+id: release-checklist
+domain: release
+mode: governed
+output: pre-release checklist
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: security-rerouter
+domain: issues
+mode: governed
+output: private reporting guidance
+requires_human_review: true
+may_publish: false

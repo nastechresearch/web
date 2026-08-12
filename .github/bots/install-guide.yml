@@ -1,0 +1,6 @@
+id: install-guide
+domain: documentation
+mode: governed
+output: installation guide draft
+requires_human_review: true
+may_publish: false

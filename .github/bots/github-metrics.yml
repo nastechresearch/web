@@ -1,0 +1,6 @@
+id: github-metrics
+domain: intelligence
+mode: governed
+output: GitHub activity report
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: onboarding-guide
+domain: documentation
+mode: governed
+output: onboarding guide draft
+requires_human_review: true
+may_publish: false

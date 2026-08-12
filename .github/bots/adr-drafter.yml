@@ -1,0 +1,6 @@
+id: adr-drafter
+domain: decisions
+mode: governed
+output: architecture decision record draft
+requires_human_review: true
+may_publish: false

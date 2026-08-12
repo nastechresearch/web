@@ -1,0 +1,6 @@
+id: mobile-readiness
+domain: mobile
+mode: governed
+output: Android readiness checklist
+requires_human_review: true
+may_publish: false

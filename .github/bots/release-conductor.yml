@@ -1,0 +1,6 @@
+id: release-conductor
+domain: release
+mode: governed
+output: release preparation checklist
+requires_human_review: true
+may_publish: false

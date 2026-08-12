@@ -1,0 +1,6 @@
+id: prompt-safety
+domain: AI assistance
+mode: governed
+output: instruction safety check
+requires_human_review: true
+may_publish: false

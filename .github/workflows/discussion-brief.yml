@@ -1,0 +1,61 @@
+name: Draft governed discussion brief
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Discussion topic"
+        required: true
+        type: string
+      source_url:
+        description: "Optional issue, pull request, or reference URL"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create a discussion brief pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TOPIC: ${{ inputs.topic }}
+          SOURCE_URL: ${{ inputs.source_url }}
+        run: |
+          slug="$(printf '%s' "$TOPIC" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-\|-$//g')"
+          branch="bot/discussion-${{ github.run_id }}"
+          mkdir -p docs/discussions
+          git switch -c "$branch"
+          cat > "docs/discussions/${{ github.run_id }}-${slug}.md" <<EOF
+          # Discussion brief: $TOPIC
+
+          ## Status
+
+          Draft for discussion — not a decision or roadmap commitment.
+
+          ## Source
+
+          ${SOURCE_URL:-No source URL supplied.}
+
+          ## Questions
+
+          - What problem are we solving?
+          - Which options are credible, and what evidence supports them?
+          - What risks, dissenting views, and unknowns must remain visible?
+          - What decision owner and review date should apply?
+
+          ## Outcome
+
+          Capture consensus, dissent, action owners, and any approved follow-up in a reviewed decision record.
+          EOF
+          git config user.name "NasTech Automation"
+          git config user.email "automation@nastechresearch.com"
+          git add docs/discussions
+          git commit -m "docs: draft discussion brief"
+          git push -u origin "$branch"
+          gh pr create --draft --base main --head "$branch" --title "docs: draft discussion brief — $TOPIC" --body "This governed draft structures a discussion. It does not make or publish a product decision."

@@ -1,0 +1,6 @@
+id: question-curator
+domain: discussions
+mode: governed
+output: clarifying question set
+requires_human_review: true
+may_publish: false

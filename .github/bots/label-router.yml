@@ -1,0 +1,6 @@
+id: label-router
+domain: issues
+mode: governed
+output: proposed issue labels
+requires_human_review: true
+may_publish: false

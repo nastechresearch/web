@@ -1,0 +1,6 @@
+id: release-notes
+domain: release
+mode: governed
+output: draft release notes
+requires_human_review: true
+may_publish: false

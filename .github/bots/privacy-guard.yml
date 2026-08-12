@@ -1,0 +1,6 @@
+id: privacy-guard
+domain: AI assistance
+mode: governed
+output: personal-data exposure warning
+requires_human_review: true
+may_publish: false

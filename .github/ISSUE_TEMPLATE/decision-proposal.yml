@@ -1,0 +1,21 @@
+name: Decision proposal
+description: Start a governed technical or product decision discussion.
+title: "decision: "
+labels: ["kind: decision", "needs discussion"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+    validations:
+      required: true
+  - type: textarea
+    id: options
+    attributes:
+      label: Options and evidence
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks, unknowns, and dissenting views

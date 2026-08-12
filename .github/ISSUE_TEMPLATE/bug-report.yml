@@ -1,0 +1,21 @@
+name: Bug report
+description: Report a reproducible problem in the public NasTech web experience.
+title: "bug: "
+labels: ["kind: bug", "needs triage"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser, operating system, or device

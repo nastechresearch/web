@@ -1,0 +1,6 @@
+id: discussion-brief
+domain: discussions
+mode: governed
+output: discussion brief
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: evidence-gatherer
+domain: decisions
+mode: governed
+output: cited evidence list
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: consensus-mapper
+domain: discussions
+mode: governed
+output: agreement and open-question map
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: meeting-minutes
+domain: discussions
+mode: governed
+output: meeting notes draft
+requires_human_review: true
+may_publish: false

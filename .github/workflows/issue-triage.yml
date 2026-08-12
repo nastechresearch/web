@@ -1,0 +1,27 @@
+name: Governed issue intake
+
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  issues: write
+
+jobs:
+  acknowledge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = [];
+            const title = issue.title.toLowerCase();
+            if (title.includes("bug") || title.includes("error") || title.includes("crash")) labels.push("kind: bug");
+            if (title.includes("feature") || title.includes("request")) labels.push("kind: feature");
+            if (labels.length) await github.rest.issues.addLabels({ ...context.repo, issue_number: issue.number, labels });
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: issue.number,
+              body: "Thanks for opening this. The governed intake bot has recorded it for maintainer review. Labels and any follow-up are suggestions, not a project decision; a maintainer will confirm priority, scope, and next steps."
+            });

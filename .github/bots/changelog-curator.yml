@@ -1,0 +1,6 @@
+id: changelog-curator
+domain: release
+mode: governed
+output: changelog draft
+requires_human_review: true
+may_publish: false

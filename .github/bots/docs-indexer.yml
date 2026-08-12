@@ -1,0 +1,6 @@
+id: docs-indexer
+domain: documentation
+mode: governed
+output: documentation index draft
+requires_human_review: true
+may_publish: false

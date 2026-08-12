@@ -1,0 +1,6 @@
+id: action-register
+domain: discussions
+mode: governed
+output: action register draft
+requires_human_review: true
+may_publish: false

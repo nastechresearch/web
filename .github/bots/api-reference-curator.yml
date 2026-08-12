@@ -1,0 +1,6 @@
+id: api-reference-curator
+domain: documentation
+mode: governed
+output: API reference draft
+requires_human_review: true
+may_publish: false

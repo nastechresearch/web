@@ -1,0 +1,6 @@
+id: ci-sentinel
+domain: intelligence
+mode: governed
+output: continuous integration status report
+requires_human_review: true
+may_publish: false

@@ -1,0 +1,6 @@
+id: android-release-prep
+domain: mobile
+mode: governed
+output: Android release preparation report
+requires_human_review: true
+may_publish: false
