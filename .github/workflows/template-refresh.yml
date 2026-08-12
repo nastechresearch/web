@@ -1,0 +1,52 @@
+name: Refresh upstream review template
+
+on:
+  workflow_call:
+    inputs:
+      revision:
+        required: true
+        type: string
+      release:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start from the latest upstream release-note draft
+        run: git pull --rebase origin main
+      - name: Refresh reusable upstream review template
+        env:
+          REVISION: ${{ inputs.revision }}
+          RELEASE: ${{ inputs.release }}
+        run: |
+          mkdir -p docs/templates
+          cat > docs/templates/upstream-update-review.md <<EOF
+          # Upstream update review template
+
+          **Current upstream revision:** \`$REVISION\`
+
+          **Current upstream release:** $RELEASE
+
+          ## Evidence reviewed
+
+          - [ ] Upstream commit and changed files were reviewed.
+          - [ ] Any public capability or install guidance remains source-backed.
+          - [ ] The release-note draft contains no unsupported claim.
+          - [ ] The public Pages build and smoke test passed.
+
+          ## Decision
+
+          - [ ] No public website change is needed.
+          - [ ] A reviewed public update is needed; link the approved pull request or release.
+          EOF
+          git config user.name "NasTech Automation"
+          git config user.email "automation@nastechresearch.com"
+          git add docs/templates
+          git diff --cached --quiet || git commit -m "docs: refresh upstream review template"
+          git push

@@ -1,0 +1,45 @@
+name: Refresh upstream release note
+
+on:
+  workflow_call:
+    inputs:
+      revision:
+        required: true
+        type: string
+      release:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start from the scanner's latest status commit
+        run: git pull --rebase origin main
+      - name: Write a source-backed upstream release note draft
+        env:
+          REVISION: ${{ inputs.revision }}
+          RELEASE: ${{ inputs.release }}
+        run: |
+          mkdir -p docs/releases
+          cat > "docs/releases/upstream-${REVISION:0:12}.md" <<EOF
+          # Upstream update draft
+
+          - Repository: https://github.com/nastechresearch/nastech-agent
+          - Revision: \`$REVISION\`
+          - Latest upstream release: $RELEASE
+          - Prepared: $(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+          ## Maintainer review
+
+          This is an automated source-status draft, not a published product release note. Review the upstream diff, verify the release context, then promote only accurate source-backed changes into public release communication.
+          EOF
+          git config user.name "NasTech Automation"
+          git config user.email "automation@nastechresearch.com"
+          git add docs/releases
+          git diff --cached --quiet || git commit -m "docs: draft upstream release note"
+          git push

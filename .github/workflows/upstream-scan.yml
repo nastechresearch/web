@@ -53,9 +53,23 @@ jobs:
           git commit -m "chore: sync upstream revision"
           git push
   quality:
-    needs: detect
+    needs: [detect, release-notes, templates]
     if: needs.detect.outputs.changed == 'true'
     uses: ./.github/workflows/quality.yml
+  release-notes:
+    needs: detect
+    if: needs.detect.outputs.changed == 'true'
+    uses: ./.github/workflows/release-note-refresh.yml
+    with:
+      revision: ${{ needs.detect.outputs.revision }}
+      release: ${{ needs.detect.outputs.release }}
+  templates:
+    needs: [detect, release-notes]
+    if: needs.detect.outputs.changed == 'true'
+    uses: ./.github/workflows/template-refresh.yml
+    with:
+      revision: ${{ needs.detect.outputs.revision }}
+      release: ${{ needs.detect.outputs.release }}
   publish:
     needs: [detect, quality]
     if: needs.detect.outputs.changed == 'true'
