@@ -1,3 +1,8 @@
 # Upstream status
 
-The scheduled scanner has not recorded an upstream revision yet. Run **Scan NasTech Agent updates** from the Actions tab or wait for the next scheduled check.
+- Repository: https://github.com/nastechresearch/nastech-agent
+- Revision: \
+- Latest release: v2026.8.11
+- Checked: 2026-08-12T19:26:22Z
+
+This file is refreshed only when the upstream revision changes.
