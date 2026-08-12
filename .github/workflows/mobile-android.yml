@@ -1,0 +1,55 @@
+name: Build NasTech Android app
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "mobile/**"
+      - ".github/workflows/mobile-android.yml"
+  pull_request:
+    paths:
+      - "mobile/**"
+      - ".github/workflows/mobile-android.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Generate a clean Android platform shell
+        run: flutter create --platforms=android --org com.nastech .
+      - name: Restore Flutter dependencies
+        run: flutter pub get
+      - name: Prepare compact Kokoro assets
+        run: |
+          python3 -m pip install --disable-pip-version-check numpy
+          python3 tool/prepare_kokoro_assets.py
+      - name: Analyze and test the Flutter app
+        run: |
+          flutter analyze
+          flutter test
+      - name: Build unsigned release APK
+        run: flutter build apk --release --dart-define=NSTECH_GEMMA_ENDPOINT=https://nastechweb-nezy9zqt.manus.space/api/mobile/gemma
+      - name: Enforce 309 MiB Android artifact ceiling
+        run: |
+          APK=build/app/outputs/flutter-apk/app-release.apk
+          SIZE=$(stat -c%s "$APK")
+          MAX=$((309 * 1024 * 1024))
+          echo "APK size: $SIZE bytes; limit: $MAX bytes"
+          test "$SIZE" -le "$MAX"
+      - name: Upload reviewable Android artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nastech-agent-android-apk
+          path: mobile/build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
