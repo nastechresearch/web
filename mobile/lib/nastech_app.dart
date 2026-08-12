@@ -10,7 +10,7 @@ class NasTechApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    title: 'NasTech Agent',
+    title: 'NasTech App',
     debugShowCheckedModeBanner: false,
     theme: nasTechTheme(),
     home: const NasTechShell(),
@@ -79,7 +79,7 @@ class _HomePage extends StatelessWidget {
         Row(children: [
           ClipRRect(borderRadius: BorderRadius.circular(18), child: Image.asset('assets/images/nastech-circle.jpg', width: 48, height: 48, fit: BoxFit.cover)),
           const SizedBox(width: 12),
-          const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('NASTECH AGENT', style: TextStyle(color: NasTechColors.cyan, fontWeight: FontWeight.w800, letterSpacing: 1.5)), Text('Sovereign intelligence', style: TextStyle(color: NasTechColors.muted, fontSize: 12))])),
+          const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('NASTECH APP', style: TextStyle(color: NasTechColors.cyan, fontWeight: FontWeight.w800, letterSpacing: 1.5)), Text('Sovereign agent intelligence', style: TextStyle(color: NasTechColors.muted, fontSize: 12))])),
           const Icon(Icons.notifications_none_rounded, color: NasTechColors.white),
         ]).animate().fadeIn(duration: 280.ms).slideY(begin: -.08),
         const SizedBox(height: 28),

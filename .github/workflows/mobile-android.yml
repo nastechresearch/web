@@ -1,4 +1,4 @@
-name: Build NasTech Android app
+name: Build NasTech App Android
 
 on:
   workflow_dispatch:
@@ -30,6 +30,7 @@ jobs:
         run: |
           flutter create --platforms=android --org com.nastech .
           rm -f test/widget_test.dart
+          sed -i 's/android:label="nastech_app"/android:label="NasTech App"/' android/app/src/main/AndroidManifest.xml
       - name: Restore Flutter dependencies
         run: flutter pub get
       - name: Prepare compact Kokoro assets
@@ -52,6 +53,6 @@ jobs:
       - name: Upload reviewable Android artifact
         uses: actions/upload-artifact@v4
         with:
-          name: nastech-agent-android-apk
+          name: nastech-app-android-apk
           path: mobile/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error

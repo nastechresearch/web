@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nastech_agent/core/voice_policy.dart';
+import 'package:nastech_app/core/voice_policy.dart';
 
 void main() {
   test('uses the compact int8 Kokoro model and one explicit voice', () {
