@@ -1,6 +1,6 @@
 # Upstream update review template
 
-**Current upstream revision:** `4f834341197c6968f5232173b2fff97b248c4128`
+**Current upstream revision:** `b91b1a681172fdd67a40d1409971ec10875e9b8f`
 
 **Current upstream release:** v2026.8.11
 
